@@ -32,7 +32,6 @@ export default {
       favicon: './assets/favicon.png'
     },
     extra: {
-      openaiApiKey: process.env.OPENAI_API_KEY,
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_ANON_KEY
     }
