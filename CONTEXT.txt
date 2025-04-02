@@ -1,0 +1,5 @@
+
+我现在想要做一个AI App，这个App的核心功能是女生可以截图和自己crush的聊天记录，或者可以直接从social mediam上export chat她和他自己的crush的记录，然后上传给AI。AI给女生一个他的crush是有多喜欢他的一个评分，这个分数从零到100。
+
+同时为女生生成一个报告，从各种的维度的层面分析女生的crush和她之间的互动是什么样的？比如说他们两个之间的attachment style，比如说他们的compatibility score，再比如说他们两个关系当中的green flag，red flag都有哪些。现在我需要你来帮我做一个开发的计划，因为我是non-technical founder你要告诉我我先怎么做再怎么做，一步步来
+
