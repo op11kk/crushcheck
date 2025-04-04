@@ -25,8 +25,10 @@ export async function uploadImageToSupabase(
     const timestamp = new Date().getTime();
     // 获取原始文件扩展名，如果无法获取则默认为jpg
     const fileExt = localImageUri.split(".").pop() || "jpg";
+    // 生成6位随机数字串
+    const randomDigits = Math.floor(Math.random() * 100);
     // 构建文件名
-    const fileName = `chat_image_${timestamp}.${fileExt}`;
+    const fileName = `chat_image_${timestamp}_${randomDigits}.${fileExt}`;
     // 构建完整的存储路径，将所有聊天图片存储在chat-images文件夹下
     const filePath = `chat-images/${fileName}`;
 
