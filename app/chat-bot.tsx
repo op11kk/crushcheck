@@ -1,11 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
-import { createClient } from '@supabase/supabase-js';
 import { Send } from 'lucide-react-native';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@env';
-
-// Initialize Supabase client
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+import { supabase } from '@/utils/supabase/supabase';
 
 type Message = {
   id: string;
