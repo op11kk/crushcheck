@@ -25,10 +25,11 @@ export async function uploadImageToSupabase(
     const timestamp = new Date().getTime();
     // 获取原始文件扩展名，如果无法获取则默认为jpg
     const fileExt = localImageUri.split(".").pop() || "jpg";
-    // 生成6位随机数字串
-    const randomDigits = Math.floor(Math.random() * 100);
     // 构建文件名
-    const fileName = `chat_image_${timestamp}_${randomDigits}.${fileExt}`;
+    const fileInfo = await FileSystem.getInfoAsync(localImageUri, {
+      md5: true,
+    });
+    const fileName = `${fileInfo.md5}.${fileExt}`;
     // 构建完整的存储路径，将所有聊天图片存储在chat-images文件夹下
     const filePath = `chat-images/${fileName}`;
 
@@ -70,12 +71,13 @@ export async function uploadImageToSupabase(
 
     // 步骤4: 获取公共URL - 这是可以直接在互联网上访问的地址
     // 这个URL可以被发送给OpenAI进行分析
-    const { data: publicUrlData } = supabase.storage
+    const imageUrl = await supabase.storage
       .from("chat-analysis")
-      .getPublicUrl(filePath);
+      .createSignedUrl(filePath, 60 * 60 * 24 * 30);
+    // .getPublicUrl(filePath);
 
     // 返回公共URL
-    return publicUrlData.publicUrl;
+    return imageUrl.data?.signedUrl ?? "";
   } catch (error) {
     // 错误处理 - 记录错误并向上抛出
     console.error("上传图片到Supabase时出错:", error);

@@ -1,0 +1,17 @@
+###
+GET https://tqihonhwracaywvdyslx.supabase.co/storage/v1/object/sign/chat-analysis/chat-images/chat_image_1743766346865_85.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJjaGF0LWFuYWx5c2lzL2NoYXQtaW1hZ2VzL2NoYXRfaW1hZ2VfMTc0Mzc2NjM0Njg2NV84NS5qcGciLCJpYXQiOjE3NDM3Njc2ODksImV4cCI6MTc0NDM3MjQ4OX0.3F6_KQGLbIHakibXF-oYLfiMBKADrrjHhfJl6Eb171M
+
+###
+PATCH http://192.168.1.168:54323/platform/auth/default/config
+accept: application/json
+authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjNlNjE5YzJjIiwidHlwIjoiSldUIn0.eyJpc3MiOiJodHRwczovL2FsdC5zdXBhYmFzZS5pby9hdXRoL3YxIiwic3ViIjoiNDYzYTE1MGEtMTYwOC00MzY3LTljOGQtYjAzMjRmNmFlNWZlIiwiYXVkIjoiYXV0aGVudGljYXRlZCIsImV4cCI6MTc0Mzg0MDIwMCwiaWF0IjoxNzQzODM5NjAwLCJlbWFpbCI6Im9saXZlci5vdTA5QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWxfdmVyaWZpZWQiOnRydWV9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzQzNzMzMTc0fV0sInNlc3Npb25faWQiOiIzOTNlOThkNi1hZmJiLTQ2MjMtYTc1NS0yY2FiYTZjYTMzZDEiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.bisWBz4mnIBBpKHS7Z8ARLezqOK1ghLc6FyKGbscSspBpaI8kS-pG1v0zWdpSnLnvmGwkd22IlKTdAZ_T4SJUq9hWqoaoerJfIXFwQFWKtFpwdQF-EbwxKB5EMHulozilGC8d2LHl-QCky3nOz8opZgH-xrXjonWrRsAznN3X6OPzaUX3UKE5o1BGO3Ojme4NofS7NF9eg4-PYGw6y2ZvzGv-Kvs55wTsfzhNbD-jMnumDxvp2B8IJ7jKxkRFZrGa5h5GLlOUScF6uI2oJ3NXwhoq0dTQxIEU9kn2Vlrc-1jd85I1DolRnVG3JH6OKtmbJ7NkN0rH6gUiM_C586R2g'
+sec-ch-ua: "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: same-site
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+x-request-id: cf4c7f3d-b497-42c9-99e8-37818412a1d2
+
+{"EXTERNAL_ANONYMOUS_USERS_ENABLED":true}

@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import Constants from "expo-constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AppState } from "react-native";
 
 // 从Constants中获取配置值
 const supabaseUrl = Constants.expoConfig?.extra?.supabaseUrl;
@@ -40,3 +41,11 @@ export async function ensureSession() {
     })();
   });
 }
+
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
