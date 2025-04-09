@@ -1,0 +1,19 @@
+<svg width="176" height="176" viewBox="0 0 176 176" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame 474">
+<foreignObject x="-12" y="-12" width="200" height="200"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(6px);clip-path:url(#bgblur_0_175_309_clip_path);height:100%;width:100%"></div></foreignObject><rect id="Rectangle 951" data-figma-bg-blur-radius="12" x="0.5" y="0.5" width="175" height="175" rx="32.5" fill="url(#paint0_linear_175_309)" fill-opacity="0.6" stroke="url(#paint1_linear_175_309)"/>
+<path id="Union" fill-rule="evenodd" clip-rule="evenodd" d="M53.8539 45.0532L51 21L48.1378 45.1229L34.975 34.7069L45.4776 48.0957L21 51L45.0626 53.855L34.907 66.6887L48.0763 56.3584L51 81L53.9087 56.4853L66.8888 66.7568L56.7828 53.8734L81 51L56.425 48.0842L66.9569 34.775L53.8539 45.0532Z" fill="white"/>
+<path id="Vector 7282" d="M152.25 33C152.25 32.5858 151.914 32.25 151.5 32.25H144.75C144.336 32.25 144 32.5858 144 33C144 33.4142 144.336 33.75 144.75 33.75H150.75V39.75C150.75 40.1642 151.086 40.5 151.5 40.5C151.914 40.5 152.25 40.1642 152.25 39.75V33ZM140.53 45.0303L152.03 33.5303L150.97 32.4697L139.47 43.9697L140.53 45.0303Z" fill="white"/>
+</g>
+<defs>
+<clipPath id="bgblur_0_175_309_clip_path" transform="translate(12 12)"><rect x="0.5" y="0.5" width="175" height="175" rx="32.5"/>
+</clipPath><linearGradient id="paint0_linear_175_309" x1="55.2471" y1="16" x2="155.532" y2="196.007" gradientUnits="userSpaceOnUse">
+<stop stop-color="#73D5D7"/>
+<stop offset="0.73888" stop-color="#D6F8F0"/>
+<stop offset="1" stop-color="#DDE5F2"/>
+</linearGradient>
+<linearGradient id="paint1_linear_175_309" x1="107.131" y1="40.875" x2="107.131" y2="233" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

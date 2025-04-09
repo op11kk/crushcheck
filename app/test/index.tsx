@@ -6,15 +6,15 @@ import * as ImagePicker from "expo-image-picker";
 import * as DocumentPicker from "expo-document-picker";
 import { ImageManipulator } from "expo-image-manipulator";
 import { SaveFormat } from "expo-image-manipulator";
-import { Link } from "expo-router";
-import { uploadImagesToSupabase } from "../utils/supabase/supabase-storage";
-import { supabase } from "../utils/supabase/supabase";
+import { Link, useRouter } from "expo-router";
+import { uploadImagesToSupabase } from "../../utils/supabase/supabase-storage";
 // 最大可选图片数量
 const MAX_IMAGES = 10;
 
 export default function Index() {
   // 加载状态，用于禁用按钮防止重复操作
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   /**
    * 从相册选择图片的函数
@@ -40,7 +40,7 @@ export default function Index() {
         allowsEditing: false, // 不允许编辑
         quality: 1, // 最高质量
         allowsMultipleSelection: true, // 允许多选图片
-        selectionLimit: MAX_IMAGES, // 限制最多选择50张图片
+        selectionLimit: MAX_IMAGES // 限制最多选择50张图片
       });
 
       // 如果用户选择了图片（未取消操作）
@@ -51,14 +51,14 @@ export default function Index() {
         try {
           // 压缩图片并获取URI
           const compressedImages = await Promise.all(
-            result.assets.map(async (asset) => {
+            result.assets.map(async asset => {
               // 使用expo-image-manipulator压缩图片
               // 质量设为0.5（50%），在保证文字清晰的前提下减小文件体积
               const manipulateContext = ImageManipulator.manipulate(asset.uri);
               const image = await manipulateContext.renderAsync();
               const compressedResult = await image.saveAsync({
                 format: SaveFormat.JPEG,
-                compress: 0.5,
+                compress: 0.5
               });
               console.log(`原图大小: ${asset.fileSize} bytes, ` + `压缩后URI: ${compressedResult.uri}`);
 
@@ -96,7 +96,7 @@ export default function Index() {
       // 打开文件选择器
       const result = await DocumentPicker.getDocumentAsync({
         type: ["*/*"], // 允许所有类型的文件
-        copyToCacheDirectory: true, // 将选择的文件复制到缓存目录，便于访问
+        copyToCacheDirectory: true // 将选择的文件复制到缓存目录，便于访问
       });
 
       // 如果用户选择了文件（未取消操作）
@@ -166,14 +166,28 @@ export default function Index() {
         </TouchableOpacity>
       </View>
 
+      {/* 查看历史分析按钮 */}
+      <TouchableOpacity
+        className="mt-6 bg-white p-4 rounded-xl flex-row items-center justify-center shadow-sm"
+        onPress={() => router.push("/chat-history")}>
+        <Text className="text-gray-800 font-medium">查看历史分析结果</Text>
+      </TouchableOpacity>
+
       {/* 底部隐私提示 */}
       <Text className="text-xs text-gray-400 mt-8 text-center">上传数据将被安全加密并仅用于分析目的</Text>
-      <Link href="/chat-bot" className="text-blue-500 p-2">
-        ChatBot
-      </Link>
-      <Link href="/test/auth" className="text-blue-500 p-2">
-        Test Auth
-      </Link>
+
+      {/* 开发导航链接 */}
+      <View className="flex-row justify-center mt-4">
+        <Link href="/chat-bot" className="text-blue-500 p-2 mx-2">
+          ChatBot
+        </Link>
+        <Link href="/chat-history" className="text-blue-500 p-2 mx-2">
+          聊天历史
+        </Link>
+        <Link href="/upload-chat" className="text-blue-500 p-2 mx-2">
+          上传聊天
+        </Link>
+      </View>
     </View>
   );
 }

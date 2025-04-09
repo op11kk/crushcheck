@@ -1,24 +1,19 @@
 import { createClient } from "@supabase/supabase-js";
-import Constants from "expo-constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppState } from "react-native";
 
-// 从Constants中获取配置值
-const supabaseUrl = Constants.expoConfig?.extra?.supabaseUrl;
-const supabaseKey = Constants.expoConfig?.extra?.supabaseKey;
-// 确保配置值存在
-if (!supabaseUrl || !supabaseKey) {
-  console.error("Supabase URL或Key未设置。请检查app.config.js和.env文件。");
-}
-
 // 创建Supabase客户端
-export const supabase = createClient(supabaseUrl || "", supabaseKey || "", {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    storage: AsyncStorage,
+export const supabase = createClient(
+  process.env.EXPO_PUBLIC_SUPABASE_URL!,
+  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!,
+  {
+    auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+      storage: AsyncStorage,
+    },
   },
-});
+);
 
 const signInCallbacks: ((session: any) => void)[] = [];
 let isSignInInProgress = false;

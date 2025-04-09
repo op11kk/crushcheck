@@ -4,6 +4,8 @@ import { Send, Image as ImageIcon } from "lucide-react-native";
 import { supabase } from "@/utils/supabase/supabase";
 import * as ImagePicker from "expo-image-picker";
 import { uploadImageToSupabase } from "@/utils/supabase/supabase-storage";
+import { useHeaderHeight } from "@react-navigation/elements";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 // Define the types locally since we can't import them directly in React Native
 type ChatCompletionContentPartText = {
   type: "text";
@@ -202,10 +204,14 @@ export default function ChatBot() {
     }
   };
 
+  const headerHeight = useHeaderHeight();
+  const insets = useSafeAreaInsets();
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} className="flex-1 bg-gray-100 dark:bg-gray-900">
-      <View className="flex-1 p-4">
+      <View className="flex-1" style={{ paddingBottom: insets.bottom }}>
         <ScrollView ref={scrollViewRef} className="flex-1" contentContainerStyle={{ paddingBottom: 10 }}>
+          <View className="w-full" style={{ height: headerHeight }} />
+
           {messages.length === 0 ? (
             <View className="flex-1 items-center justify-center py-10">
               <Text className="text-gray-500 dark:text-gray-400 text-center">Start a conversation with the AI assistant</Text>
