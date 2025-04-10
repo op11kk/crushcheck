@@ -8,12 +8,15 @@ import AppButton from "@/components/AppButton";
 import { Header, useHeaderHeight } from "@react-navigation/elements";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useState } from "react";
+import { chooseFiles } from "@/utils/files";
 
 export default function HomeScreen() {
   const headerHeight = useHeaderHeight();
   const tabBarHeight = useBottomTabBarHeight();
   console.log(headerHeight, tabBarHeight);
   const insets = useSafeAreaInsets();
+  const [bottomActionsShown, setBottomActionsShown] = useState(false);
   return (
     <LinearGradient colors={["rgba(254, 247, 243, 1)", "rgba(255, 255, 255, 1)"]} className="flex-1" style={{ flex: 1 }}>
       <Stack.Screen
@@ -37,13 +40,46 @@ export default function HomeScreen() {
         </View>
         <View style={{ height: tabBarHeight }} className="w-full" />
       </ScrollView>
-      <Link href="/upload-chat" className="absolute self-center rounded-full w-[363] h-[72] mb-4 overflow-hidden" style={{ bottom: tabBarHeight }}>
-        <ImageBackground
-          source={require("@/assets/images/button.png")}
-          className="justify-center items-center w-[363] h-[72] rounded-full self-center mb-10">
-          <Text className="text-white text-lg font-bold font-['Poppins'] w-auto">Upload chat</Text>
-        </ImageBackground>
-      </Link>
+      {bottomActionsShown && (
+        <View onTouchStart={() => setBottomActionsShown(false)} className="absolute flex-1 bg-black/50 top-0 left-0 right-0 bottom-0" />
+      )}
+      <View className="absolute bottom-0 self-center">
+        {bottomActionsShown && (
+          <>
+            <AppButton
+              onPress={() => {
+                chooseFiles();
+              }}
+              className="self-center rounded-full w-[363] h-[72] mb-2 overflow-hidden"
+              style={{ bottom: tabBarHeight }}>
+              <View className="justify-center items-center w-[363] h-[72] rounded-full self-center mb-10 bg-white">
+                <Text className="justify-center text-zinc-800 text-base font-normal font-['Poppins'] leading-tight [text-shadow:_0px_1px_3px_rgb(0_0_0_/_0.20)]">
+                  Upload screenshot
+                </Text>
+              </View>
+            </AppButton>
+            <Link href="/upload-chat" className="self-center rounded-full w-[363] h-[72] mb-4 overflow-hidden" style={{ bottom: tabBarHeight }}>
+              <View className="justify-center items-center w-[363] h-[72] rounded-full self-center mb-10 bg-white">
+                <Text className="justify-center text-zinc-800 text-base font-normal font-['Poppins'] leading-tight [text-shadow:_0px_1px_3px_rgb(0_0_0_/_0.20)]">
+                  Upload whole chat
+                </Text>
+              </View>
+            </Link>
+          </>
+        )}
+        <AppButton
+          onPress={() => {
+            setBottomActionsShown(o => !o);
+          }}
+          className="self-center rounded-full w-[363] h-[72] mb-4 overflow-hidden"
+          style={{ bottom: tabBarHeight }}>
+          <ImageBackground
+            source={require("@/assets/images/button.png")}
+            className="justify-center items-center w-[363] h-[72] rounded-full self-center mb-10">
+            <Text className="text-white text-lg font-bold font-['Poppins'] w-auto">Upload chat</Text>
+          </ImageBackground>
+        </AppButton>
+      </View>
     </LinearGradient>
   );
 }

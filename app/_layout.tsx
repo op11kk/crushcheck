@@ -31,7 +31,13 @@ SplashScreen.preventAutoHideAsync();
 Appearance.setColorScheme("light");
 
 export default function RootLayout() {
-  const loaded = true;
+  const [loaded, errors] = useFonts({
+    PoppinsSemiBold: require("@/assets/fonts/Poppins-SemiBold.ttf"),
+    PoppinsMedium: require("@/assets/fonts/Poppins-Medium.otf"),
+    PoppinsBold: require("@/assets/fonts/Poppins-Bold.ttf"),
+    LindenHillItalic: require("@/assets/fonts/LindenHill-Italic.ttf"),
+    LindenHillRegular: require("@/assets/fonts/LindenHill-Regular.ttf")
+  });
 
   useEffect(() => {
     if (loaded) {
@@ -56,18 +62,19 @@ function RootLayoutNav() {
           headerShown: true,
           headerShadowVisible: false,
           headerTransparent: true,
-          headerBlurEffect: "regular",
+          headerBlurEffect: "none",
           headerStyle: {
             backgroundColor: "transparent"
           }
         }}>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="(tabs)"
           options={{
             headerShown: true,
-            headerShadowVisible: false
+            headerTransparent: false,
+            headerTitle: "Red Flag AI"
           }}
-        />
+        /> */}
       </Stack>
     </ThemeProvider>
   );

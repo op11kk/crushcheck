@@ -15,13 +15,13 @@ export default function TabTwoScreen() {
   const navigation = useNavigation();
   React.useEffect(() => {
     navigation.setOptions({
-      headerRight: () => <Button onPress={() => {}} title="Update count" />
+      // headerRight: () => <Button onPress={() => {}} title="Update count" />
     });
   }, [navigation]);
   return (
     <View className="flex-1">
       <View className="" style={{ height: headerHeight }} />
-      <View className="flex-1">
+      <View className="flex-1 mt-9">
         <ImageBackground source={require("@/assets/images/home/card.svg")} className="w-[318] h-[385] self-center" />
       </View>
       <View className="flex-row items-center self-center">
@@ -30,7 +30,7 @@ export default function TabTwoScreen() {
             <Text className=" text-lg font-bold mb-8 ml-4">Chat with</Text>
           </ImageBackground>
         </Link>
-        <Link href="/chat-bot?type=expert">
+        <Link href="/chat-bot?type=expert" className="ml-4">
           <ImageBackground source={require("@/assets/images/home/text.svg")} className="w-[176] h-[176] ml-4 justify-end">
             <Text className=" text-lg font-bold mb-8 ml-4">Text Expert</Text>
           </ImageBackground>
