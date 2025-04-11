@@ -74,7 +74,8 @@ export default function TabLayout() {
         <Tabs.Screen
           name="explore"
           options={{
-            title: "",
+            title: "Explore",
+            headerTitle: "",
             tabBarIcon: ({ color }) => <Image source={require("@/assets/images/home/tab_explore.svg")} className="w-[20] h-[19]" tintColor={color} />,
             headerLeft: () => <Image source={require("@/assets/images/home/explore.svg")} className="w-[65] h-[22] ml-4" />,
             headerRight: () => (

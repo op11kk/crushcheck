@@ -10,7 +10,9 @@ import "react-native-reanimated";
 
 import { cssInterop, useColorScheme } from "nativewind";
 import { LinearGradient } from "expo-linear-gradient";
-import { Appearance } from "react-native";
+import { Appearance, Platform } from "react-native";
+import Purchases from "react-native-purchases";
+import { ensureSession } from "@/utils/supabase/supabase";
 
 cssInterop(Image, { className: "style" });
 cssInterop(LinearGradient, { className: "style" });
@@ -44,6 +46,29 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+
+  useEffect(() => {
+    ensureSession();
+
+    Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
+    if (Platform.OS === "ios") {
+      Purchases.configure({ apiKey: process.env.EXPO_PUBLIC_REVENUECAT_PUBLIC_APPLE_API_KEY! });
+    }
+    (async () => {
+      try {
+        const customerInfo = await Purchases.getCustomerInfo();
+        if (typeof customerInfo.entitlements.active["Pro"] !== "undefined") {
+          // Grant user "pro" access
+        }
+        Purchases.addCustomerInfoUpdateListener(info => {
+          // handle any changes to purchaserInfo
+        });
+      } catch (e) {
+        console.log(e);
+        // Error fetching purchaser info
+      }
+    })();
+  }, []);
 
   if (!loaded) {
     return null;

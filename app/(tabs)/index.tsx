@@ -5,16 +5,16 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Link, Stack } from "expo-router";
 import { Image, ImageBackground } from "expo-image";
 import AppButton from "@/components/AppButton";
-import { Header, useHeaderHeight } from "@react-navigation/elements";
+import { useHeaderHeight } from "@react-navigation/elements";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useState } from "react";
 import { chooseFiles } from "@/utils/files";
+import TestPurchase from "@/components/ui/TestPurchase";
 
 export default function HomeScreen() {
   const headerHeight = useHeaderHeight();
   const tabBarHeight = useBottomTabBarHeight();
-  console.log(headerHeight, tabBarHeight);
   const insets = useSafeAreaInsets();
   const [bottomActionsShown, setBottomActionsShown] = useState(false);
   return (
@@ -38,6 +38,7 @@ export default function HomeScreen() {
             <Image source={require("@/assets/images/home/right.svg")} className="w-4 h-[6]" />
           </View>
         </View>
+        <TestPurchase />
         <View style={{ height: tabBarHeight }} className="w-full" />
       </ScrollView>
       {bottomActionsShown && (
