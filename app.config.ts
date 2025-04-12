@@ -21,6 +21,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: "harmone.CrushAI",
+    "config": {
+      "usesNonExemptEncryption": false,
+    },
   },
   android: {
     adaptiveIcon: {
@@ -35,6 +38,19 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     "expo-router",
     [
       "expo-splash-screen",
+    ],
+    [
+      "expo-secure-store",
+      {
+        "configureAndroidBackup": true,
+      },
+    ],
+    [
+      "expo-image-picker",
+      {
+        "photosPermission":
+          "The app accesses your photos to let you upload screenshots.",
+      },
     ],
   ],
 });

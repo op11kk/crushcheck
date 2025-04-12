@@ -64,7 +64,7 @@ export default function RootLayout() {
           // handle any changes to purchaserInfo
         });
       } catch (e) {
-        console.log(e);
+        console.log("getCustomerInfo", e);
         // Error fetching purchaser info
       }
     })();
