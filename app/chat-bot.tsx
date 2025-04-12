@@ -173,7 +173,10 @@ export default function ChatBot() {
 
       // Call the Supabase Edge Function with the proper OpenAI message format
       const { data, error } = await supabase.functions.invoke("analyze-chat", {
-        body: openAIMessages
+        body: {
+          type: "chat",
+          messages: openAIMessages
+        }
       });
 
       if (error) throw error;
@@ -181,7 +184,7 @@ export default function ChatBot() {
       // Add bot response to the chat
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: { type: "text", text: data || "Sorry, I couldn't process your request." },
+        content: { type: "text", text: data?.message || "Sorry, I couldn't process your request." },
         isUser: false,
         timestamp: new Date()
       };

@@ -1,3 +1,4 @@
+import { ensureSession } from "@/utils/supabase/supabase";
 import AppButton from "../AppButton";
 import { Text } from "react-native";
 import Purchases from "react-native-purchases";
@@ -7,6 +8,7 @@ export default function TestPurchase() {
     <AppButton
       onPress={async () => {
         try {
+          await ensureSession();
           const products = await Purchases.getProducts(["crushsign_weekly_399"]);
           console.log(products);
           const { customerInfo } = await Purchases.purchaseStoreProduct(products[0]);

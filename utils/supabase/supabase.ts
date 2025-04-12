@@ -4,6 +4,7 @@ import { AppState } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import * as Application from "expo-application";
 import * as Crypto from "expo-crypto";
+import Purchases from "react-native-purchases";
 
 // 创建Supabase客户端
 export const supabase = createClient(
@@ -29,8 +30,8 @@ export async function ensureSession() {
     }
     isSignInInProgress = true;
 
-    let session = await supabase.auth.getSession();
-    if (!session?.data?.session) {
+    let session = await supabase.auth.getUser();
+    if (!session?.data?.user) {
       let idfvMD5 = await SecureStore.getItemAsync(authLocalKey);
       if (!idfvMD5) {
         async function ensureIDFV() {
@@ -64,8 +65,9 @@ export async function ensureSession() {
       }
       // saved in ios keychain
       await SecureStore.setItemAsync(authLocalKey, idfvMD5);
-      session = await supabase.auth.getSession();
+      session = await supabase.auth.getUser();
     }
+    await Purchases.logIn(session.data!.user!.id!);
     signInCallbacks.forEach((callback) => callback(session));
     isSignInInProgress = false;
     resolve(session);

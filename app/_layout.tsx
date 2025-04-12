@@ -50,9 +50,9 @@ export default function RootLayout() {
   useEffect(() => {
     ensureSession();
 
-    Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
+    Purchases.setLogLevel(__DEV__ ? Purchases.LOG_LEVEL.DEBUG : Purchases.LOG_LEVEL.ERROR);
     if (Platform.OS === "ios") {
-      Purchases.configure({ apiKey: process.env.EXPO_PUBLIC_REVENUECAT_PUBLIC_APPLE_API_KEY! });
+      Purchases.configure({ apiKey: process.env.EXPO_PUBLIC_REVENUECAT_PUBLIC_API_KEY! });
     }
     (async () => {
       try {
