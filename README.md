@@ -17,3 +17,11 @@ NODE_ENV=development npx expo start
 rm -rf ios
 npx expo run:ios --device
 ```
+
+### deploy to production
+
+#### the best way is to use ci
+
+TODO
+
+#### or you can use supabase cli

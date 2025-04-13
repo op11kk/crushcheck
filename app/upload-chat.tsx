@@ -14,8 +14,7 @@ const pageDataList = [
       require("@/assets/images/upload-chat/whatsapp/2.png"),
       require("@/assets/images/upload-chat/whatsapp/3.png"),
       require("@/assets/images/upload-chat/whatsapp/4.png"),
-      require("@/assets/images/upload-chat/whatsapp/5.png"),
-      require("@/assets/images/upload-chat/whatsapp/6.png")
+      require("@/assets/images/upload-chat/whatsapp/5.png")
     ]
   },
   // { source: require("@/assets/images/upload-chat/telegram.svg"), name: "Telegram" },
@@ -102,24 +101,29 @@ export default function UploadChat() {
         Choose a platform to analyze your chat
       </Text>
       <View className="flex-1">
-        <View className="items-center justify-center self-center w-[359] h-[502]">
+        <View className="items-center justify-center self-center w-[362] h-[395] bg-zinc-500 rounded-2xl overflow-hidden">
           <FlashList
             data={pageDataList[selected].images}
             pagingEnabled={true}
             horizontal={true}
-            estimatedItemSize={359}
-            estimatedListSize={{ height: 502, width: 359 }}
+            estimatedItemSize={362}
+            estimatedListSize={{ height: 395, width: 362 }}
             renderItem={({ item }) => (
-              <Image contentFit="contain" contentPosition="center" source={item} className="w-[359] h-[502] rounded-xl self-center" />
+              <Image
+                contentFit="contain"
+                contentPosition="top"
+                source={item}
+                className="w-[362] h-[395] rounded-2xl self-center border border-gray-200"
+              />
             )}
             showsHorizontalScrollIndicator={false}
             onScroll={onScroll}
           />
-          <View className="h-2 flex-row items-center justify-center mt-2">
-            {pageDataList[selected].images.map((_, index) => (
-              <View key={index} className={`w-2 h-2 rounded-full self-center ml-2 ${index === selectedImage ? "bg-orange-500" : "bg-zinc-300"}`} />
-            ))}
-          </View>
+        </View>
+        <View className="h-2 flex-row items-center justify-center mt-3">
+          {pageDataList[selected].images.map((_, index) => (
+            <View key={index} className={`w-2 h-2 rounded-full self-center ml-2 ${index === selectedImage ? "bg-orange-500" : "bg-zinc-300"}`} />
+          ))}
         </View>
       </View>
       <AppButton onPress={() => {}}>

@@ -2,8 +2,14 @@ import { ensureSession } from "@/utils/supabase/supabase";
 import AppButton from "../AppButton";
 import { Text } from "react-native";
 import Purchases from "react-native-purchases";
+import { Link } from "expo-router";
 
 export default function TestPurchase() {
+  return (
+    <Link href="/pay-wall" className="mt-10">
+      <Text className="text-black text-lg font-bold font-['Poppins'] w-auto">Test Purchase</Text>
+    </Link>
+  );
   return (
     <AppButton
       onPress={async () => {
