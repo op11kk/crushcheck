@@ -57,7 +57,8 @@
     "expo-dev-client": "~5.0.19",
     "expo-secure-store": "~14.0.1",
     "expo-application": "~6.0.2",
-    "expo-crypto": "~14.0.2"
+    "expo-crypto": "~14.0.2",
+    "@shopify/flash-list": "1.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

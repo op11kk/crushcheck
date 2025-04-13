@@ -358,10 +358,7 @@ Deno.serve(async (req) => {
 
     // Return the created report ID or a success message
     return new Response(
-      JSON.stringify({
-        reportId: insertedReport.id,
-        message: "Report generated successfully",
-      }),
+      JSON.stringify(insertedReport),
       {
         headers: { "Content-Type": "application/json" },
         status: 200,
