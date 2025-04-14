@@ -9,6 +9,7 @@ import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanima
 import AppButton from "@/components/AppButton";
 import { ensureSession } from "@/utils/supabase/supabase";
 import Purchases from "react-native-purchases";
+import CountDown from "@/components/ui/CountDown";
 
 const banners = [require("@/assets/images/pay-wall/crush.svg"), require("@/assets/images/pay-wall/redflag.png")];
 
@@ -17,6 +18,7 @@ export default function PayWall() {
   const navigation = useNavigation();
   const window = Dimensions.get("window");
   const textCarouselRef = useRef<ICarouselInstance>(null);
+
   React.useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -46,17 +48,9 @@ export default function PayWall() {
   const ref = React.useRef<ICarouselInstance>(null);
   const bannerHeight = (204 * window.width) / 350;
   const bannerWidth = window.width;
-  React.useEffect(() => {
-    // const listenerId = 999;
-    // progress.removeListener(listenerId);
-    // progress.addListener(listenerId, value => {
-    //   console.debug("value", value);
-    // });
-    // return () => {
-    //   progress.removeListener(listenerId);
-    // };
-  }, []);
-  const indicatorDotSize = 8;
+
+  const indicatorDotSize = 8; // 61000 1 1
+
   return (
     <View className="flex-1">
       <Stack.Screen options={{ title: "" }} />
@@ -153,50 +147,7 @@ export default function PayWall() {
           <View className="flex-row self-center flex-1 justify-center items-center">
             <View>
               <View className="flex-row items-center justify-center">
-                <View
-                  style={{
-                    shadowColor: "rgba(99, 152, 188, 0.06)",
-                    shadowOffset: {
-                      width: 0,
-                      height: 2
-                    },
-                    shadowRadius: 3,
-                    elevation: 3,
-                    shadowOpacity: 1,
-                    borderRadius: 6,
-                    backgroundColor: "#fff",
-                    borderStyle: "solid",
-                    borderColor: "rgba(132, 132, 132, 1)",
-                    borderWidth: 1,
-                    width: 35,
-                    height: 45,
-                    overflow: "hidden"
-                  }}>
-                  <Text className="left-[12.52px] top-[12.52px] absolute justify-center text-zinc-500 text-lg font-normal font-['Impact']">5</Text>
-                </View>
-                <View
-                  className="ml-2"
-                  style={{
-                    shadowColor: "rgba(99, 152, 188, 0.06)",
-                    shadowOffset: {
-                      width: 0,
-                      height: 2
-                    },
-                    shadowRadius: 3,
-                    elevation: 3,
-                    shadowOpacity: 1,
-                    borderRadius: 6,
-                    backgroundColor: "#fff",
-                    borderStyle: "solid",
-                    borderColor: "rgba(132, 132, 132, 1)",
-                    borderWidth: 1,
-                    width: 35,
-                    height: 45,
-                    overflow: "hidden"
-                  }}>
-                  <Text className="left-[12.52px] top-[12.52px] absolute justify-center text-zinc-500 text-lg font-normal font-['Impact']">5</Text>
-                </View>
-                <Text className="justify-center text-zinc-500 text-lg font-normal font-['Impact']">：</Text>
+                <CountDown />
               </View>
               <Text className="text-center justify-center text-black text-xl font-medium font-['Poppins'] absolute -top-3 -left-3">⏰</Text>
             </View>
