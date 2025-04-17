@@ -3,6 +3,7 @@ import * as DocumentPicker from "expo-document-picker";
 import { Alert } from "react-native";
 import { ImageManipulator, SaveFormat } from "expo-image-manipulator";
 import { uploadImagesToSupabase } from "./supabase/supabase-storage";
+import { router } from "expo-router";
 
 const MAX_IMAGES = 50;
 export async function chooseFiles() {
@@ -56,7 +57,13 @@ export async function chooseFiles() {
             const uploadedUrls = await uploadImagesToSupabase(compressedImages);
             console.log("上传成功，图片URLs:", uploadedUrls);
 
-            // TODO: 之后可以实现跳转到分析结果页面，并传递uploadedUrls
+            // 跳转到上下文输入页面，并传递上传的图片URLs
+            router.push({
+                pathname: '/report-context' as any,
+                params: { 
+                    imageUrls: JSON.stringify(uploadedUrls)
+                }
+            });
         } catch (error) {
             console.error("处理或上传图片时出错:", error);
         }
