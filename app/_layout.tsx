@@ -2,17 +2,19 @@ import "../global.css";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Image, ImageBackground } from "expo-image";
 import "react-native-reanimated";
 
 import { cssInterop, useColorScheme } from "nativewind";
 import { LinearGradient } from "expo-linear-gradient";
-import { Appearance, Platform } from "react-native";
+import { Appearance, Platform, Alert } from "react-native";
 import Purchases from "react-native-purchases";
 import { ensureSession } from "@/utils/supabase/supabase";
+import * as Linking from "expo-linking";
+import { handleReceivedUrl } from "@/utils/fileHandler";
 
 cssInterop(Image, { className: "style" });
 cssInterop(LinearGradient, { className: "style" });
@@ -68,7 +70,32 @@ export default function RootLayout() {
         // Error fetching purchaser info
       }
     })();
+
+    setupUrlHandling();
   }, []);
+
+  const setupUrlHandling = async () => {
+    const initialUrl = await Linking.getInitialURL();
+    if (initialUrl) {
+      const file = await handleReceivedUrl(initialUrl);
+      if (file) {
+        console.log("File received1:", file);
+        router.replace("/shared-files");
+      }
+    }
+
+    const subscription = Linking.addEventListener("url", async ({ url }) => {
+      const file = await handleReceivedUrl(url);
+      if (file) {
+        console.log("File received2:", file);
+        router.replace("/shared-files");
+      }
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  };
 
   if (!loaded) {
     return null;

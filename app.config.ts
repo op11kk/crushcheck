@@ -24,6 +24,36 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     "config": {
       "usesNonExemptEncryption": false,
     },
+    infoPlist: {
+      CFBundleDocumentTypes: [
+        {
+          CFBundleTypeName: "Images",
+          LSHandlerRank: "Alternate",
+          LSItemContentTypes: [
+            "public.image",
+            "public.jpeg",
+            "public.png",
+          ],
+        },
+        {
+          CFBundleTypeName: "Documents",
+          LSHandlerRank: "Alternate",
+          LSItemContentTypes: [
+            "public.content",
+            "public.data",
+            "public.text",
+            "public.pdf",
+          ],
+        },
+      ],
+      // 添加 URL Scheme，使其他应用可以打开我们的应用
+      CFBundleURLTypes: [
+        {
+          CFBundleURLName: "harmone.CrushAI",
+          CFBundleURLSchemes: ["crushcheck"]
+        }
+      ],
+    },
   },
   android: {
     adaptiveIcon: {
