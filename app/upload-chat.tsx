@@ -17,6 +17,23 @@ const pageDataList = [
       require("@/assets/images/upload-chat/whatsapp/5.png")
     ]
   },
+  {
+    source: require("@/assets/images/upload-chat/instagram.svg"),
+    name: "Instagram",
+    images: [
+      require("@/assets/images/upload-chat/instagram/1.png"),
+      require("@/assets/images/upload-chat/instagram/2.png"),
+      require("@/assets/images/upload-chat/instagram/3.png"),
+      require("@/assets/images/upload-chat/instagram/4.png"),
+      require("@/assets/images/upload-chat/instagram/5.png"),
+      require("@/assets/images/upload-chat/instagram/6.png"),
+      require("@/assets/images/upload-chat/instagram/7.png"),
+      require("@/assets/images/upload-chat/instagram/8.png"),
+      require("@/assets/images/upload-chat/instagram/9.png"),
+      require("@/assets/images/upload-chat/instagram/10.png"),
+      require("@/assets/images/upload-chat/instagram/11.png")
+    ]
+  },
   // { source: require("@/assets/images/upload-chat/telegram.svg"), name: "Telegram" },
   {
     source: require("@/assets/images/upload-chat/messenger.svg"),
@@ -33,28 +50,7 @@ const pageDataList = [
       require("@/assets/images/upload-chat/messenger/9.png"),
       require("@/assets/images/upload-chat/messenger/10.png"),
       require("@/assets/images/upload-chat/messenger/11.png"),
-      require("@/assets/images/upload-chat/messenger/12.png"),
-      require("@/assets/images/upload-chat/messenger/13.png"),
-      require("@/assets/images/upload-chat/messenger/14.png")
-    ]
-  },
-  {
-    source: require("@/assets/images/upload-chat/instagram.svg"),
-    name: "Instagram",
-    images: [
-      require("@/assets/images/upload-chat/instagram/1.png"),
-      require("@/assets/images/upload-chat/instagram/2.png"),
-      require("@/assets/images/upload-chat/instagram/3.png"),
-      require("@/assets/images/upload-chat/instagram/4.png"),
-      require("@/assets/images/upload-chat/instagram/5.png"),
-      require("@/assets/images/upload-chat/instagram/6.png"),
-      require("@/assets/images/upload-chat/instagram/7.png"),
-      require("@/assets/images/upload-chat/instagram/8.png"),
-      require("@/assets/images/upload-chat/instagram/9.png"),
-      require("@/assets/images/upload-chat/instagram/10.png"),
-      require("@/assets/images/upload-chat/instagram/11.png"),
-      require("@/assets/images/upload-chat/instagram/12.png"),
-      require("@/assets/images/upload-chat/instagram/13.png")
+      require("@/assets/images/upload-chat/messenger/12.png")
     ]
   }
 ];
@@ -80,18 +76,22 @@ export default function UploadChat() {
   };
   return (
     <View className="flex-1 bg-white" style={{ paddingTop: headerHeight }}>
-      <View className="flex-row items-center justify-center self-center gap-2 p-2">
+      <View className="flex-row items-center justify-center self-center gap-3 p-2">
         {pageDataList.map((item, index) => (
           <Pressable
             key={item.name}
             onPress={() => {
               setSelected(index);
             }}
-            className={`w-[84] h-[78] rounded-xl ${
-              selected === index ? "bg-white" : "bg-transparent"
-            } flex-col justify-center items-center gap-2 shadow`}>
+            className={`w-[84] h-[78] bg-white rounded-xl ${
+              selected === index ? "shadow-[inset_0px_1px_2px_0px_rgba(0,0,0,0.15)]" : ""
+            } inline-flex flex-col justify-center items-center`}
+            // className={`w-[84] h-[78] rounded-xl ${
+            //   selected === index ? "bg-white" : "bg-transparent"
+            // } flex-col justify-center items-center gap-2 shadow`}
+          >
             <Image source={item.source} className="w-8 h-8" />
-            <Text className="h-5 text-center justify-center text-neutral-400 text-[10px] font-medium font-['Poppins'] leading-tight">
+            <Text className="mt-2 leading-tight text-center justify-center text-neutral-400 text-[10px] font-medium font-['Poppins']">
               {item.name}
             </Text>
           </Pressable>
