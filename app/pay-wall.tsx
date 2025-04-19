@@ -11,7 +11,38 @@ import { ensureSession } from "@/utils/supabase/supabase";
 import Purchases from "react-native-purchases";
 import CountDown from "@/components/ui/CountDown";
 
-const banners = [require("@/assets/images/pay-wall/crush.svg"), require("@/assets/images/pay-wall/redflag.png")];
+const banners = [
+  {
+    banner: require("@/assets/images/pay-wall/crush.svg"),
+    text: "Uncover that person's\n💓crush level"
+  },
+  {
+    banner: require("@/assets/images/pay-wall/redflag.png"),
+    text: "Uncover that person's\n🩹Redflag"
+  },
+  {
+    banner: require("@/assets/images/pay-wall/tips.png"),
+    text: "🫂 Get relationship tips"
+  },
+  {
+    banner: require("@/assets/images/pay-wall/text.png"),
+    text: "Expert breakdown and replies\nto keep your crush chasing the convo",
+    title: "💬 AI Text Expert",
+    titleImage: require("@/assets/images/pay-wall/bonus.png")
+  },
+  {
+    banner: require("@/assets/images/pay-wall/butterfly.png"),
+    text: "Expert backed moves,\nleave your crush thinking about you all night",
+    title: "🦋 Butterfly effect",
+    titleImage: require("@/assets/images/pay-wall/bonus.png")
+  },
+  {
+    banner: require("@/assets/images/pay-wall/crush.png"),
+    text: "24/7 crush strategist,\nget advice that make your crush want you",
+    title: "🦋 AI Crush Expert",
+    titleImage: require("@/assets/images/pay-wall/bonus.png")
+  }
+];
 
 export default function PayWall() {
   const headerHeight = useHeaderHeight();
@@ -55,26 +86,35 @@ export default function PayWall() {
     <View className="flex-1">
       <Stack.Screen options={{ title: "" }} />
       <View className=" w-full" style={{ height: headerHeight }} />
-      <View className="w-full flex-row items-center justify-center mt-6 h-[36]">
-        <Text className="text-zinc-800 text-2xl font-normal font-['Poppins'] h-[36] self-center">Uncover his/her</Text>
+      <View className="w-full flex-row items-center justify-center h-[100]">
         <Carousel
           ref={textCarouselRef}
-          data={[" crush level", " 🚩Redflag"]}
-          height={36}
+          data={banners}
+          height={100}
           loop={true}
           pagingEnabled={true}
           snapEnabled={true}
-          width={120}
-          style={{
-            width: 120
-          }}
+          width={320}
           vertical={true}
           modeConfig={{
             parallaxScrollingScale: 0.9,
             parallaxScrollingOffset: 50
           }}
-          renderItem={({ item }) => {
-            return <Text className="text-zinc-800 text-2xl font-normal font-['Poppins']">{item}</Text>;
+          renderItem={({ item, index }) => {
+            return (
+              <View key={index} className="w-[320] h-[100] justify-center items-center">
+                {item.title && <Image className="w-[100] h-[32]" source={item.titleImage} />}
+                {item.title && <Text className="justify-center text-zinc-800 text-2xl font-normal font-['Poppins']">{item.title}</Text>}
+                <Text
+                  className={
+                    item.title
+                      ? "text-center justify-start text-zinc-800 text-base font-normal font-['Linden_Hill']"
+                      : "text-center text-2xl text-zinc-800 font-normal font-['Poppins']"
+                  }>
+                  {item.text}
+                </Text>
+              </View>
+            );
           }}
         />
       </View>
@@ -98,23 +138,24 @@ export default function PayWall() {
           }}
           autoPlay={true}
           onSnapToItem={index => {
-            const textIndex = index % 2;
+            const textIndex = index % banners.length;
             textCarouselRef.current?.scrollTo({ index: textIndex, animated: true });
           }}
-          renderItem={({ item }) => {
+          renderItem={({ item, index }) => {
+            // shadow-[inset_1px_-2px_2px_0px_rgba(0,0,0,0.08)] shadow-[inset_0px_1px_2px_0px_rgba(0,0,0,0.15)] bg-white/80
             return (
-              <View
-                className={`w-[${bannerWidth}] h-[${bannerHeight}] bg-white/80 rounded-[20px] overflow-hidden shadow-[inset_1px_-2px_2px_0px_rgba(0,0,0,0.08)] shadow-[inset_0px_1px_2px_0px_rgba(0,0,0,0.15)] self-center`}>
-                <Image source={item} style={{ width: bannerWidth, height: bannerHeight }} />
+              <View key={index} className={`w-[${bannerWidth}] h-[${bannerHeight}] rounded-[20px] overflow-hidden self-center`}>
+                <Image source={item.banner} style={{ width: bannerWidth, height: bannerHeight }} />
               </View>
             );
           }}
+          onProgressChange={progress}
         />
         <View className="self-center">
           <View className="flex-row items-center justify-center">
             {banners.map((item, index) => (
               <View
-                key={item}
+                key={index}
                 className="bg-zinc-400 rounded-3xl"
                 style={{ width: indicatorDotSize, height: indicatorDotSize, marginLeft: index === 0 ? 0 : indicatorDotSize }}
               />
@@ -139,17 +180,20 @@ export default function PayWall() {
             <Text className="left-[15px] top-[5px] absolute justify-center text-black text-base font-medium font-['Poppins']">80%off</Text>
           </View>
           <View className="flex-row items-center justify-center mt-10">
-            <Text className="text-zinc-800 text-xl font-medium font-['Poppins']">Only </Text>
-            <Text className="text-red-400 text-3xl font-medium font-['Poppins']">$</Text>
+            <Text className="text-zinc-800 text-xl font-medium font-['Poppins'] mt-2">Only </Text>
+            <Text className="text-red-400 text-3xl font-medium font-['Poppins'] mt-2">$</Text>
             <Text className="text-red-400 text-3xl font-normal font-['Impact']">3.99</Text>
-            <Text className="text-zinc-800 text-xl font-medium font-['Poppins']">/week </Text>
+            <Text className="text-zinc-800 text-xl font-medium font-['Poppins'] mt-2 ml-1">/week </Text>
           </View>
-          <View className="flex-row self-center flex-1 justify-center items-center">
-            <View>
-              <View className="flex-row items-center justify-center">
-                <CountDown />
+          <View className="flex-1 justify-center items-center">
+            <Text className="justify-center text-zinc-500 text-sm font-normal font-['Poppins'] self-center mb-1">discount ends in</Text>
+            <View className="flex-row self-center justify-center items-center">
+              <View>
+                <View className="flex-row items-center justify-center">
+                  <CountDown />
+                </View>
+                <Text className="text-center justify-center text-black text-xl font-medium font-['Poppins'] absolute -top-3 -left-3">⏰</Text>
               </View>
-              <Text className="text-center justify-center text-black text-xl font-medium font-['Poppins'] absolute -top-3 -left-3">⏰</Text>
             </View>
           </View>
           <AppButton
